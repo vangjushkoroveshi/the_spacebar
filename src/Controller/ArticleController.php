@@ -10,9 +10,10 @@ namespace App\Controller;
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/")
@@ -27,7 +28,16 @@ class ArticleController
      */
     public function show($url)
     {
-        return new Response(sprintf('Article page: %s', $url));
+        $comments =['Further development under the auspices of the IETF was stalled by competing interests. Since 1996',
+            'Further development under the auspices of the IETF was stalled by competing interests. Since 1996',
+            'Further development under the auspices of the IETF was stalled by competing interests. Since 1996',
+            ];
+
+        return $this->render('article/show.html.twig', [
+            'title' =>ucwords(str_replace('-', '', $url)),
+            'comments' => $comments,
+
+        ]);
     }
 
 }
